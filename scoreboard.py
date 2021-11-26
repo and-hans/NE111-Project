@@ -13,3 +13,4 @@ class scoreboard:
         score_font = pygame.font.SysFont(self.font, self.size, True)
         text = score_font.render(f"Score: {self.score}", True, self.colour)
         screen.blit(text, self.position)
+

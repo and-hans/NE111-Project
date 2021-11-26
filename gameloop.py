@@ -29,14 +29,14 @@ clock = pygame.time.Clock()
 FPS = 60
 
 #food class variable
-fod = food(RED,(20,20),food_pos)
+fod = food(RED, (20,20), rnd_food)
+
+#snake class variable
+player = snake(snake_direction, BLUE, 20, snake_body)
 
 #scoreboard class variable
 score_count = 0
 score = scoreboard("Ariel", 24, score_count, BLACK, (0,0))
-
-#snake class variable
-player = snake(snake_direction, snake_length, BLUE, 5, snake_body)
 
 #gameloop
 running = True
@@ -54,6 +54,23 @@ while running:
                 snake_direction = (-5,0)
             elif event.key == pygame.K_RIGHT:
                 snake_direction = (5,0)
+                
+    
+    if snake_direction == (0,-5):
+        curr_pos[1] -= 10
+    if snake_direction == (0,5):
+        curr_pos[1] += 10
+    if snake_direction == (-5,0):
+        curr_pos[0] -= 10
+    if snake_direction == (5,0):
+        curr_pos[0] += 10
+    
+
+    snake_body.insert(0, list(curr_pos))
+    snake_body.pop()
+
+    if (player.head).colliderect(fod.food_po):
+        rnd_food = (random.randrange(790), random.randrange(590))
 
     #fill screen
     screen.fill(WHITE)
@@ -63,15 +80,6 @@ while running:
     score.draw_score(screen)
 
     player.draw(screen)
-
-
-    
-    head = snake_body[0]
-    move = (head[0]+snake_direction[0], head[1]+snake_direction[1])
-    snake_body.insert(0, move)
-
-    while len(snake_body) > snake_length:
-        snake_body.pop()
 
     #update screen
     pygame.display.flip()
