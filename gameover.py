@@ -35,23 +35,32 @@ class gamechange:
         else:
             high_score_text = game_over_font.render(f'New High Score: {self.highscore}', True, (255,0,0))
         
-        middle_bot = ((self.WIDTH/4)+100, (self.HEIGHT/2.5)+300)
+        middle_low = ((self.WIDTH/4)+100, (self.HEIGHT/2.5)+200)
+
+
+        continue_text = game_over_font.render('Press any key to continue', True, (255,0,0))
+        middle_bot = ((self.WIDTH/4)+50, (self.HEIGHT/2.5)+300)
 
 
         screen.fill((255,255,255))
 
         screen.blit(game_over_text, middle)
         screen.blit(gameover_score, middle_mid)
-        screen.blit(high_score_text, middle_bot)
+        screen.blit(high_score_text, middle_low)
+        screen.blit(continue_text ,middle_bot)
 
         pygame.display.flip()
 
         time.sleep(0.5)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                if event.type == pygame.KEYDOWN:
+                    return
+
         
 
 

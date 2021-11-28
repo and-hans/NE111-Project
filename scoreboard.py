@@ -1,7 +1,5 @@
 import pygame
 
-#scoreboard counter
-score_count = 0
 
 #scoreboard class
 class scoreboard:
