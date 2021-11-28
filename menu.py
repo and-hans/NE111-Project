@@ -71,13 +71,13 @@ def show_menu(settings:dict, apple_counts:list, speeds:list, display:pygame.Surf
 
     speed_buttons = []
     for i in range(0, len(speeds)):
-        speed_buttons.append(Button((window_width / 2, 190+40*i), 40, 30,menuFont, str(i+1)+"cc"))
+        speed_buttons.append(Button((window_width / 2, 190+40*i), 50, 30,menuFont, str(i+1)+"cc"))
 
-    infinite_mode = Button((window_width / 2, window_height-200), 100, 30, menuFont, "infinite_mode")
+    infinite_mode = Button((window_width / 2, window_height-200), 200, 30, menuFont, "infinite_mode")
 
     #default to green and red, change to dark green and dark red when hovered over respectively
-    start_button = Button((window_width / 2, window_height-60),60,45,menuFont, "Start", GREEN, DARKGREEN)
-    exit_button = Button((window_width / 2, window_height-20),60,15,menuFont, "Quit", RED, DARKRED)
+    start_button = Button((window_width / 2, window_height-60),70,45,menuFont, "Start", GREEN, DARKGREEN)
+    exit_button = Button((window_width / 2, window_height-20),70,15,menuFont, "Quit", RED, DARKRED)
 
 
     while True:
@@ -116,8 +116,6 @@ def show_menu(settings:dict, apple_counts:list, speeds:list, display:pygame.Surf
 
         #render static text
         display.blit(titleSurf1, rect1)
-
-        # display.blit(apple_heading, rect2)
 
         display.blit(speed_heading, rect3)
 

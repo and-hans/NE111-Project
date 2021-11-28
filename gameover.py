@@ -73,8 +73,11 @@ class gamechange:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
+                #return to game loop if a key is pressed
                 if event.type == pygame.KEYDOWN:
-                    return
+                    #ignore arrow keys though, so no instant exiting from game-over screen
+                    if not (event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+                        return
 
         
 

@@ -84,6 +84,9 @@ def gameloop(settings):
 
             #values assignments based on button pressed, value arbitrary as long as it's unique from others
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return
+
                 if event.key == pygame.K_UP:
                     snake_direction = -1
                 elif event.key == pygame.K_DOWN:
@@ -159,7 +162,6 @@ def gameloop(settings):
         for snake_pos in snake_body[1:]:
             if snake_pos[0] == curr_pos[0] and snake_pos[1] == curr_pos[1]:
                 if starting_pos == None:
-                    print(snake_pos)
                     running = False
                     game_s.gameover(screen, score_count)
 
