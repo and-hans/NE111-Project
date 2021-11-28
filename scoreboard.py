@@ -1,5 +1,8 @@
 import pygame
 
+#scoreboard counter
+score_count = 0
+
 #scoreboard class
 class scoreboard:
     def __init__(self, font, size, score, colour, position):
