@@ -22,9 +22,9 @@ class gamechange:
         game_over_font = pygame.font.SysFont('Times New Roman', 30)
         game_over_text = game_over_font.render(f"Score", True, (255,0,0))
         gameover_score = game_over_font.render(f"{score}", True, (255,0,0))
-        middle = (self.WIDTH/2.5+20, self.HEIGHT/2.5)
-        middle_mid = ((self.WIDTH/2.5)+50, (self.HEIGHT/2.5)+50)
-
+        continue_text = game_over_font.render('Press any key to continue', True, (255,0,0))
+        
+        
         if score > self.highscore:
             self.highscore = score
             high_score_text = game_over_font.render(f'New High Score: {self.highscore}', True, (255,0,0))
@@ -35,10 +35,10 @@ class gamechange:
         else:
             high_score_text = game_over_font.render(f'New High Score: {self.highscore}', True, (255,0,0))
         
-        middle_low = ((self.WIDTH/4)+100, (self.HEIGHT/2.5)+200)
 
-
-        continue_text = game_over_font.render('Press any key to continue', True, (255,0,0))
+        middle = game_over_text.get_rect(center=(self.WIDTH/2, self.HEIGHT/2-100))
+        middle_mid = gameover_score.get_rect(center=(self.WIDTH/2, self.HEIGHT/2-50))
+        middle_low = high_score_text.get_rect(center=(self.WIDTH/2, self.HEIGHT/2))
         middle_bot = ((self.WIDTH/4)+50, (self.HEIGHT/2.5)+300)
 
 
@@ -47,7 +47,7 @@ class gamechange:
         screen.blit(game_over_text, middle)
         screen.blit(gameover_score, middle_mid)
         screen.blit(high_score_text, middle_low)
-        screen.blit(continue_text ,middle_bot)
+        screen.blit(continue_text, middle_bot)
 
         pygame.display.flip()
 
