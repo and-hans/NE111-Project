@@ -32,11 +32,11 @@ FPS = 60
 
 #user preference variables
 #---------------------------------------------------
-#choices for apple-count setting
+#choices for apple-count setting, this hasn't been implemented and probably won't be
 apple_counts = [1,3,5]
 
 #choices for speed setting
-speeds = [3,6,9]
+speeds = [3,6,9, 12]
 
 #global variable to be set in menu then used during gameplay
 settings = {"apple_count_index":0, "speed_index": 0, "infinite_mode":False}
@@ -51,9 +51,11 @@ def gameloop(settings):
     new_food = [random.randrange(790), random.randrange(590)]
 
 
-    #snake variables
+    #snake variables initialization
     snake_body = [[100, 50], [90, 50], [80, 50]]
     curr_pos = [snake_body[0][0], snake_body[0][1]]
+    
+    #set speed to the speed selected in menu
     speed = speeds[settings["speed_index"]]
 
     starting_pos = [100, 50]
@@ -126,11 +128,13 @@ def gameloop(settings):
         if pygame.Rect.colliderect(player.segment, fod.food_po):    #if the snake and food Rectangles/hitboxes collide with each other
             snake_body.append(new_food)
             new_food_que = [random.randrange(780), random.randrange(580)]
-            for pos in snake_body:                                  #checks if the new generated food position exists within the snakes body, if it does then it generates a new food queue. But if it does not, then it creates the new food position
-                if pos != new_food_que:
-                    new_food = new_food_que
-                else:
-                    new_food_que = [random.randrange(780), random.randrange(580)]
+            for i in range(10):                                 #essentially a while True loop but if it fails 10 times just move on. In practice its very unlikely to run more than 3 times
+                for pos in snake_body:                                  #checks if the new generated food position exists within the snakes body, if it does then it generates a new food queue. But if it does not, then it creates the new food position
+                    if pygame.Rect.colliderect(pygame.Rect(pos,(player.size, player.size)), pygame.Rect(new_food_que, fod.size)):
+                        new_food_que = [random.randrange(780), random.randrange(580)]
+                        break
+            new_food = new_food_que
+                        
             score_count += 10                                       #increase the score count when the food is eaten
 
         #border collision
