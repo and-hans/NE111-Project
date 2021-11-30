@@ -35,8 +35,8 @@ FPS = 60
 #choices for apple-count setting, this hasn't been implemented and probably won't be
 apple_counts = [1,3,5]
 
-#choices for speed setting
-speeds = [3,6,9, 12]
+#choices for speed setting, cooresponds to fps
+speeds = [30,60,90]
 
 #global variable to be set in menu then used during gameplay
 settings = {"apple_count_index":0, "speed_index": 0, "infinite_mode":False}
@@ -55,8 +55,8 @@ def gameloop(settings):
     snake_body = [[100, 50], [90, 50], [80, 50]]
     curr_pos = [snake_body[0][0], snake_body[0][1]]
     
-    #set speed to the speed selected in menu
-    speed = speeds[settings["speed_index"]]
+    #set snakes movement per frame in pixels, should be less than body width
+    speed =  6
 
     starting_pos = [100, 50]
     #snake is stationary until first button press
@@ -183,8 +183,8 @@ def gameloop(settings):
             #update screen
             pygame.display.flip()
 
-        #refresh 60 times a second
-        clock.tick(FPS)
+        #refresh based on the speed (faster refresh rate for faster moving snake), but it should be high enough to avoid choppy looking movement
+        clock.tick(speeds[settings["speed_index"]])
 
 #menu settings
 while True:

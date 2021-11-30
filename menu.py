@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 
-#define some colours
+#define some colours I want to use
 WHITE = (255, 255, 255)
 GREY = (155, 155, 155)
 LIGHTGREY = (200, 200, 200)
@@ -13,7 +13,7 @@ DARKRED =(155, 0 ,0)
 #background colour is black
 BGCOLOR = (  0,   0,   0)
 
-#somewhat arbitrary fps for menu, just keep it higher than 10
+#somewhat arbitrary fps for menu, just keep it higher than 10 to be safe
 FPS = 15
 
 
@@ -22,7 +22,7 @@ FPS = 15
 #   options for image instead of text
 class Button():
     def __init__(self, pos:(int,int), x_width:int, y_height:int, font:pygame.font.Font, text:str, color = WHITE, hover_color = GREY): 
-        """ position tuple, x_width, y_height,pygame font, text (string) """ 
+        """ position tuple, x_width, y_height,pygame font, text (string), resting colour (default is white), colour when hovered over (default is grey) """ 
         self.font = font
         self.text = text
         self.pos = pos
@@ -34,7 +34,7 @@ class Button():
 
     
     def mouseOver(self, mouse:(int,int), mousedown:bool):
-        #check if the mouse is in the rectangle defined by the pos, width, and height by comparing each dimension of mouse position to bounds
+        #check if the mouse is in the rectangle defined by the pos, width, and height by comparing each dimension of mouse position to bounds (this is in pixel space)
         over = (self.bounds[0][0] <= mouse[0] <= self.bounds[0][1] and self.bounds[1][0] <= mouse[1] <= self.bounds[1][1])
 
         #if mouse is hovering over, change colour to hover_color, if mouse is down and hovering, change to mousedown_colour
@@ -128,17 +128,22 @@ def show_menu(settings:dict, apple_counts:list, speeds:list, display:pygame.Surf
         for i in range(len(speeds)):
             speed_buttons[i].render(display)
 
+            #pointer for selected option
             if settings["speed_index"]==i:
                 txt = menuFont.render(">", True, WHITE)
                 rect = txt.get_rect()
+
+                #set the position to be beside the button it cooresponds to
                 rect.center =  (speed_buttons[i].pos[0]-50, speed_buttons[i].pos[1])
                 display.blit(txt, rect)
 
         infinite_mode.render(display)
 
-        #indicate whether infinite mode is on
+        #indicate whether infinite mode is on using ternary operator
         txt_inf = menuFont.render("ON" if settings["infinite_mode"] else "OFF", True, WHITE)
         rect_inf = txt.get_rect()
+
+        #set the position to be beside the infinite mode button
         rect_inf.center = (infinite_mode.pos[0]-200, infinite_mode.pos[1])
         display.blit(txt_inf, rect_inf)
         
@@ -149,5 +154,6 @@ def show_menu(settings:dict, apple_counts:list, speeds:list, display:pygame.Surf
 
 
 def terminate():
+    """stop pygame and close the window"""
     pygame.quit()
     sys.exit()
