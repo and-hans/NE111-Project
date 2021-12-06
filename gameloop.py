@@ -27,11 +27,11 @@ BLACK = (0,0,0)
 WIDTH = 800
 HEIGHT = 600
 
-#create screen
+#initialization of the game window
 screen = pygame.display.set_mode((WIDTH,HEIGHT))   
 pygame.display.set_caption("NE111 Game: Snake")
 
-#refresh rate
+#refresh rate/implementing FPS controller
 clock = pygame.time.Clock() 
 
 #user preference variables
@@ -53,7 +53,6 @@ def gameloop(settings):
 
     #foods first position
     new_food = [random.randrange(790), random.randrange(590)]
-
 
     #snake variables initialization
     snake_body = [[100, 50], [90, 50], [80, 50]]
