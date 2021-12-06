@@ -1,3 +1,8 @@
+#This Module was made by Andrew Hanraj,
+#Menu, inifite mode, new food location finding added by Sawyer Hossfeld, also changed control flow
+#Comments done by Eugene Jang
+
+
 #import pygame library, and all the other made libraries
 import pygame
 from pygame.constants import K_DOWN, K_RIGHT
@@ -28,7 +33,6 @@ pygame.display.set_caption("NE111 Game: Snake")
 
 #refresh rate
 clock = pygame.time.Clock() 
-FPS = 60
 
 #user preference variables
 #---------------------------------------------------

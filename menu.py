@@ -1,3 +1,6 @@
+#This Module was made by Sawyer Hossfeld
+
+
 import pygame, sys
 from pygame.locals import *
 
@@ -16,7 +19,7 @@ BGCOLOR = (  0,   0,   0)
 #somewhat arbitrary fps for menu, just keep it higher than 10 to be safe
 FPS = 15
 
-
+# This lets me create buttons with a one time initilization and two calls per update cycle. it was really messy before I made it into a class
 # potentially to be added to Button:
 #   option for bounding box graphic
 #   options for image instead of text
@@ -26,7 +29,7 @@ class Button():
         self.font = font
         self.text = text
         self.pos = pos
-        #initialize the bounds as the pos +- half the span of the button in that dimension
+        #initialize the bounds as the pos +- half the span of the button in that dimension (pass widths in as a tuple? whatever)
         self.bounds = ( (pos[0]-x_width/2, pos[0]+x_width/2), (pos[1]-y_height/2, pos[1]+y_height/2) )
         self.color = color
         self.render_color = color;
@@ -43,7 +46,7 @@ class Button():
         #return true if the button was clicked
         return over and mousedown
 
-    #put all the stuff required to create a text element then display it in one place
+    #encapsulate all the stuff required to create a text element then display it to avoid pain and mess
     def render(self, screen:pygame.Surface):
         txt = self.font.render(self.text, True, self.render_color)
         rect = txt.get_rect()
@@ -94,7 +97,8 @@ def show_menu(settings:dict, apple_counts:list, speeds:list, display:pygame.Surf
         #get mouse pos (pixel space)
         mouse = pygame.mouse.get_pos()
 
-
+        
+        #Buttons are checked outside of 'if click' because even when the player doesn't click on them, they change coulor when hovered over
         #check for press on speed button
         for i in range(len(speeds)):
             if speed_buttons[i].mouseOver(mouse, click):
